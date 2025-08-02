@@ -1,0 +1,1 @@
+# StayVista-client
