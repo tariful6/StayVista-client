@@ -10,6 +10,12 @@ import Dashboard from '../layouts/Dashboard/Dashboard'
 import Statistics from '../pages/Dashboard/Common/Statistics'
 import AddRoom from '../pages/Dashboard/Host/AddRoom'
 import MyListings from '../pages/Dashboard/Host/MyListings'
+import Profile from '../pages/Dashboard/Common/Profile'
+import ManageUser from '../pages/Dashboard/Admin/ManageUser/ManageUser'
+import AdminRoute from './AdminRoute'
+import HostRoute from './HostRoute'
+import MyBookings from '../pages/Dashboard/Guest/MyBookings/MyBookings'
+import ManageBookings from '../pages/Dashboard/Host/ManageBookings'
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +29,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/rooms/:id',
-        element: <PrivateRoute> <RoomDetails /></PrivateRoute>
+        element: <PrivateRoute><RoomDetails /></PrivateRoute>
       },
     ],
   },
@@ -37,20 +43,38 @@ export const router = createBrowserRouter([
   },
   { 
     path: '/dashboard', 
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children : [
       {
         path: '/dashboard',
-        element: <Statistics></Statistics>
+        element: <PrivateRoute><Statistics></Statistics></PrivateRoute>
       },
       {
         path: 'add-room',
-        element: <AddRoom></AddRoom>
+        element: <PrivateRoute><HostRoute><AddRoom></AddRoom></HostRoute></PrivateRoute>
       },
       {
         path: 'my-listings',
-        element: <MyListings></MyListings>
+        element: <PrivateRoute><HostRoute><MyListings></MyListings></HostRoute></PrivateRoute>
       },
+      {
+        path: 'my-bookings',
+        element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+      },
+      {
+        path: 'manage-bookings',
+        element: <PrivateRoute><HostRoute><ManageBookings></ManageBookings></HostRoute></PrivateRoute>
+      },
+
+      {
+        path: 'manage-users',
+        element: <PrivateRoute><AdminRoute><ManageUser></ManageUser></AdminRoute></PrivateRoute>
+      },
+      {
+        path: 'profile',
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>
+      },
+
     ]
   },
 ])

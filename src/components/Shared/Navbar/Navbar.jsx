@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/images/placeholder.jpg'
 import HostRequestModal from '../../Modal/HostRequestModal'
-import axios from 'axios'
+// import axios from 'axios'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'
 import toast from 'react-hot-toast'
 
@@ -26,7 +26,7 @@ const Navbar = () => {
         role : 'guest',
         status : 'Requested'
       }
-      const {data} = await axiosSecure.put(`${import.meta.env.VITE_API_URL}/user`, currentUser)
+      const {data} = await axiosSecure.put(`/user`, currentUser)
       console.log(data);
       if(data.modifiedCount > 0){
         toast.success('Success | Wait for admin approval')
@@ -40,6 +40,9 @@ const Navbar = () => {
       closeModal()
     }
   }
+
+
+
 
   return (
     <div className='fixed w-full bg-white z-10 shadow-sm'>
